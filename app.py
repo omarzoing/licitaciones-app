@@ -60,6 +60,7 @@ st.markdown("""
     }
     .info-box {
         background-color: #f8f9fa;
+        color: #333333 !important;
         padding: 15px;
         border-radius: 8px;
         border-left: 4px solid #667eea;
@@ -249,11 +250,21 @@ def mostrar_paso_2_diseño_hoja():
     col_header1, col_header2 = st.columns([3, 1])
     
     with col_header1:
-        st.markdown('<div class="info-box">', unsafe_allow_html=True)
-        st.write(f"**Empresa:** {st.session_state.empresa_seleccionada['nombre_completo']}")
+    with col_header1:
+        logo_html = ""
         if st.session_state.logo_seleccionado:
-            st.image(st.session_state.logo_seleccionado, width=120)
-        st.markdown('</div>', unsafe_allow_html=True)
+            # Convertir imagen para incrustar en HTML
+            buffered = BytesIO()
+            st.session_state.logo_seleccionado.save(buffered, format="PNG")
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            logo_html = f'<div style="margin-top: 10px;"><img src="data:image/png;base64,{img_str}" width="120"></div>'
+            
+        st.markdown(f"""
+        <div class="info-box">
+            <strong>Empresa:</strong> {st.session_state.empresa_seleccionada['nombre_completo']}
+            {logo_html}
+        </div>
+        """, unsafe_allow_html=True)
     
     with col_header2:
         if st.button("⬅️ Cambiar Logo", use_container_width=True):
@@ -321,13 +332,22 @@ def mostrar_paso_3_contenido():
     col1, col2 = st.columns([2, 1])
     
     with col2:
-        st.markdown('<div class="info-box">', unsafe_allow_html=True)
-        st.write("**Resumen:**")
-        st.write(f"**Empresa:** {st.session_state.empresa_seleccionada['nombre']}")
+    with col2:
+        logo_html = ""
         if st.session_state.logo_seleccionado:
-            st.image(st.session_state.logo_seleccionado, width=150)
-        st.write(f"**Diseño:** {st.session_state.diseño_seleccionado.title()}")
-        st.markdown('</div>', unsafe_allow_html=True)
+            buffered = BytesIO()
+            st.session_state.logo_seleccionado.save(buffered, format="PNG")
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            logo_html = f'<div style="margin: 10px 0;"><img src="data:image/png;base64,{img_str}" width="150"></div>'
+
+        st.markdown(f"""
+        <div class="info-box">
+            <p><strong>Resumen:</strong></p>
+            <p><strong>Empresa:</strong> {st.session_state.empresa_seleccionada['nombre']}</p>
+            {logo_html}
+            <p><strong>Diseño:</strong> {st.session_state.diseño_seleccionado.title()}</p>
+        </div>
+        """, unsafe_allow_html=True)
         
         if st.button("⬅️ Cambiar Diseño", use_container_width=True):
             st.session_state.paso = 2
