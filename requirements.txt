@@ -5,3 +5,4 @@ weasyprint>=60.1
 python-dotenv
 requests
 beautifulsoup4
+huggingface-hub>=0.20.0
