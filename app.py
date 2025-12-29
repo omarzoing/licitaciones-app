@@ -184,13 +184,17 @@ def mostrar_paso_1_generacion_logos():
     col1, col2 = st.columns([2, 1])
     
     with col2:
-        st.markdown('<div class="info-box">', unsafe_allow_html=True)
-        st.write("**Instrucciones:**")
-        st.write("1. Genera 5 opciones de logos")
-        st.write("2. Revisa cada opción")
-        st.write("3. Si no te convencen, genera nuevas opciones")
-        st.write("4. Selecciona tu favorito")
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="info-box">
+            <strong>Instrucciones:</strong>
+            <ol style="margin-top: 10px; margin-bottom: 0px; padding-left: 20px;">
+                <li>Genera 5 opciones de logos</li>
+                <li>Revisa cada opción</li>
+                <li>Si no te convencen, genera nuevas opciones</li>
+                <li>Selecciona tu favorito</li>
+            </ol>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col1:
         if st.button("🎨 Generar 5 Opciones de Logos", type="primary", use_container_width=True):
@@ -430,7 +434,7 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("https://via.placeholder.com/200x100/667eea/ffffff?text=Constructor+AI", width=200)
+        st.image("constructor_ai_logo.png", width=200)
         st.title("Generador de Hojas Membretadas")
         st.markdown("---")
         
