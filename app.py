@@ -250,7 +250,6 @@ def mostrar_paso_2_diseño_hoja():
     col_header1, col_header2 = st.columns([3, 1])
     
     with col_header1:
-    with col_header1:
         logo_html = ""
         if st.session_state.logo_seleccionado:
             # Convertir imagen para incrustar en HTML
@@ -331,7 +330,6 @@ def mostrar_paso_3_contenido():
     
     col1, col2 = st.columns([2, 1])
     
-    with col2:
     with col2:
         logo_html = ""
         if st.session_state.logo_seleccionado:
